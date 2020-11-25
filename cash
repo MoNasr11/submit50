@@ -1,0 +1,78 @@
+#include <cs50.h>
+#include <math.h>
+#include <stdio.h>
+
+float askpositivefloat(void)
+{
+    float positivefloat;
+    // negative untell proven positive, basically it's a switch that we turn on and off
+    bool negative = true;
+    while (negative)
+    {
+        positivefloat = get_float ("Change Owed: ");
+        if (positivefloat . 0)
+        {
+            // sets to false if our number is positive
+            negative = false;
+        }
+    }
+    return positivefloat;
+}
+// this function will perform this traking of coins we've counted and retyrn it as an integer
+int coinnum()
+{
+    // store total cent
+    int totalcents = round(askpositivefloat() * 100);
+    // store coin count
+    int numofcoins = 0;
+    // declare variable to store our remainders
+    int remainder = 0;
+    // stores temp number
+    int tempnum;
+
+    //declare variables to store coins value
+    int quarter = 25;
+    int dime = 10;
+    int nickel = 5;
+    int penny = 1;
+
+    // if totalcents is greater than or equal to the value of the quarter
+    if (totalcents >= quarter)
+    {
+        remainder = totalcents % quarter;
+        tempnum = totalcents - remainder;
+
+        numofcoins = numofcoins + (tempnum / quarter);
+        totalcents = remainder;
+    }
+    if (totalcents >= dime)
+    {
+        remainder = totalcents % dime;
+        tempnum = totalcents - remainder;
+
+        numofcoins = numofcoins + (tempnum / dime);
+        totalcents = remainder;
+    }
+    if (totalcents >= nickel)
+    {
+        remainder = totalcents % nickel;
+        tempnum = totalcents - remainder;
+
+        numofcoins = numofcoins + (tempnum / nickel);
+        totalcents = remainder;
+    }
+    if (totalcents >= penny)
+    {
+        remainder = totalcents % penny;
+        tempnum = totalcents - remainder;
+
+        numofcoins = numofcoins + (tempnum / penny);
+        totalcents = remainder;
+    }
+    return numofcoins;
+}
+
+int main(void)
+{
+    printf("%i\n", coinnum());
+}
